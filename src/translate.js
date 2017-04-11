@@ -5,7 +5,7 @@ export default class T {
   }
 
   $t(key, ...args) {
-    let str = this.messages[this.locale][key]
+    let str = String(this.messages[this.locale][key])
 
     if (args.length === 1 && typeof args[0] === 'object') {
       args = args[0]

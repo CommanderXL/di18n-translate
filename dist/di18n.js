@@ -58,7 +58,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _di18n = __webpack_require__(1);
 
-	_di18n.DI18n.Version = ("0.0.1");
+	_di18n.DI18n.Version = ("0.0.3");
 
 	module.exports = _di18n.DI18n;
 
@@ -205,7 +205,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        args[_key - 1] = arguments[_key];
 	      }
 
-	      var str = this.messages[this.locale][key];
+	      var str = String(this.messages[this.locale][key]);
 
 	      if (args.length === 1 && _typeof(args[0]) === 'object') {
 	        args = args[0];
