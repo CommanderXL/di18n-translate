@@ -6,19 +6,41 @@
   const DI18n = require('di18n-translate')
   const di18n = new DI18n({
     locale: 'en',       // 语言环境
-    isReplace: false,   // 是否进行替换(适用于没有使用任何构建工具开发流程)
+    isReplace: false,   // 是否开启运行时功能(适用于没有使用任何构建工具开发流程)
     messages: {         // 语言映射表
       en: {
-        你好: 'Hello'
+        你好: 'Hello, {xl}'
       },
       zh: {
-        你好: '你好'
+        你好: '你好, {xl}'
       }
     }
   })
+```
 
-  // 无参数
-  di18n.$t('你好')
-  // 有参数
-  di18n.$t('你好', {person: 'xl'})
+  di18n有2个翻译方法: `$t`, `$html`
+
+
+```javascript
+  // 带参数
+  di18n.$t('你好', {person: 'xl'})    
+  // 输出 Hello, xl
+```
+
+```javascript
+let tpl = '<div class="wrapper ${locale}">' +
+    '<img src="/images/${locale}/test.png">' +
+    '<p>$t('你好')</p>' + 
+    '</div>'
+
+let str = di18n.$html(tpl)
+
+// 字符串替换后输出字符串str: 
+  <div class="wrapper en">
+    <img src="/images/en/test.png">
+    <p>Hello</p>
+  </div>
+
+// 最后再将这个dom字符串传入到页面当中去
+document.querySelector('.box-wrapper').innerHTML = str
 ```

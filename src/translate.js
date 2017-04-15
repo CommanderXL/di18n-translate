@@ -34,4 +34,16 @@ export default class T {
       }
     })
   }
+
+  $html(content) {
+    content = String(content)
+    let RE_NARGS = /\$\{locale\}|\$t\(['"]([\s\S]+?)['"]\)/g
+    return content.replace(RE_NARGS, (match, prefix, i, index) => {
+      if (match === '${locale}') {
+        return this.locale
+      } else {
+        return this.messages[this.locale][prefix] || prefix
+      }
+    })
+  }
 }

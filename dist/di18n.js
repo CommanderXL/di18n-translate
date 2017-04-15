@@ -58,7 +58,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _di18n = __webpack_require__(1);
 
-	_di18n.DI18n.Version = ("0.0.3");
+	_di18n.DI18n.Version = ("0.0.4");
 
 	module.exports = _di18n.DI18n;
 
@@ -230,6 +230,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }
 
 	          return result;
+	        }
+	      });
+	    }
+	  }, {
+	    key: '$html',
+	    value: function $html(content) {
+	      var _this = this;
+
+	      content = String(content);
+	      var RE_NARGS = /\$\{locale\}|\$t\(['"]([\s\S]+?)['"]\)/g;
+	      var $t = this.$t;
+	      return content.replace(RE_NARGS, function (match, prefix, i, index) {
+	        if (match === '${locale}') {
+	          return _this.locale;
+	        } else {
+	          return _this.messages[_this.locale][prefix] || prefix
 	        }
 	      });
 	    }
