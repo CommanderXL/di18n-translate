@@ -23,10 +23,7 @@ export class DI18n extends T {
     if (this.isReplace) {
       this.getDoms()
 
-      this.handlerClass()
-      this.handlerImg()
-      this.handlerContent()
-      this.handlerInput()
+      this.fresh()
     }
   }
 
@@ -64,5 +61,12 @@ export class DI18n extends T {
       let placeHolderKey = dom.getAttribute(PLACEHOLDER_ATTRIBUTE)
       dom.setAttribute('placeholder', this.currMessage[placeHolderKey])
     })
+  }
+
+  fresh() {
+    this.handlerClass()
+    this.handlerImg()
+    this.handlerContent()
+    this.handlerInput()
   }
 }

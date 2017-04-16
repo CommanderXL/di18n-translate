@@ -27,10 +27,11 @@
   // 输出 Hello, xl
 ```
 
+字符串拼接的`dom`中使用`${locale}`表示语言环境，`$t()`标识需要翻译的字段，用法如下:
 ```javascript
 let tpl = '<div class="wrapper ${locale}">' +
     '<img src="/images/${locale}/test.png">' +
-    '<p>$t('你好')</p>' + 
+    '<p>$t("你好")</p>' + 
     '</div>'
 
 let str = di18n.$html(tpl)

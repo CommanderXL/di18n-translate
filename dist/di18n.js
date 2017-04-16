@@ -58,7 +58,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _di18n = __webpack_require__(1);
 
-	_di18n.DI18n.Version = ("0.0.4");
+	_di18n.DI18n.Version = ("0.0.5");
 
 	module.exports = _di18n.DI18n;
 
@@ -114,10 +114,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (_this.isReplace) {
 	      _this.getDoms();
 
-	      _this.handlerClass();
-	      _this.handlerImg();
-	      _this.handlerContent();
-	      _this.handlerInput();
+	      _this.fresh();
 	    }
 	    return _this;
 	  }
@@ -168,6 +165,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var placeHolderKey = dom.getAttribute(PLACEHOLDER_ATTRIBUTE);
 	        dom.setAttribute('placeholder', _this4.currMessage[placeHolderKey]);
 	      });
+	    }
+	  }, {
+	    key: 'fresh',
+	    value: function fresh() {
+	      this.handlerClass();
+	      this.handlerImg();
+	      this.handlerContent();
+	      this.handlerInput();
 	    }
 	  }]);
 
@@ -240,12 +245,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      content = String(content);
 	      var RE_NARGS = /\$\{locale\}|\$t\(['"]([\s\S]+?)['"]\)/g;
-	      var $t = this.$t;
 	      return content.replace(RE_NARGS, function (match, prefix, i, index) {
 	        if (match === '${locale}') {
 	          return _this.locale;
 	        } else {
-	          return _this.messages[_this.locale][prefix] || prefix
+	          return _this.messages[_this.locale][prefix] || prefix;
 	        }
 	      });
 	    }
