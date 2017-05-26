@@ -58,7 +58,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _di18n = __webpack_require__(1);
 
-	_di18n.DI18n.Version = ("0.0.5");
+	_di18n.DI18n.Version = ("0.0.6");
 
 	module.exports = _di18n.DI18n;
 
@@ -94,6 +94,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var CONTENT_ATTRIBUTE = 'i18n-content';
 	var PLACEHOLDER_ATTRIBUTE = 'i18n-placeholder';
 	var LOCALE_PATTERN = /\$\{locale}/g;
+	var noop = function noop() {};
 
 	var DI18n = exports.DI18n = function (_T) {
 	  _inherits(DI18n, _T);
@@ -132,7 +133,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'handlerClass',
 	    value: function handlerClass() {
-	      this.doms.classDoms.forEach(function (dom, index) {
+	      this.doms.classDoms && this.doms.classDoms.forEach(function (dom, index) {
 	        (0, _util.addClass)(dom, dom.getAttribute(CLASS_ATTRIBUTE));
 	      });
 	    }
@@ -141,7 +142,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function handlerImg() {
 	      var _this2 = this;
 
-	      this.doms.imgDoms.forEach(function (dom, index) {
+	      this.doms.imgDoms && this.doms.imgDoms.forEach(function (dom, index) {
 	        var src = dom.getAttribute(IMG_ATTRIBUTE).replace(LOCALE_PATTERN, _this2.locale);
 	        dom.src = src;
 	      });
@@ -151,7 +152,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function handlerContent() {
 	      var _this3 = this;
 
-	      this.doms.contentDoms.forEach(function (dom, index) {
+	      this.doms.contentDoms && this.doms.contentDoms.forEach(function (dom, index) {
 	        var content = dom.getAttribute(CONTENT_ATTRIBUTE);
 	        dom.innerHTML = _this3.messages[_this3.locale][content];
 	      });
@@ -161,7 +162,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function handlerInput() {
 	      var _this4 = this;
 
-	      this.doms.inputDoms.forEach(function (dom, index) {
+	      this.doms.inputDoms && this.doms.inputDoms.forEach(function (dom, index) {
 	        var placeHolderKey = dom.getAttribute(PLACEHOLDER_ATTRIBUTE);
 	        dom.setAttribute('placeholder', _this4.currMessage[placeHolderKey]);
 	      });
@@ -173,6 +174,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.handlerImg();
 	      this.handlerContent();
 	      this.handlerInput();
+	    }
+	  }, {
+	    key: 'setLocale',
+	    value: function setLocale(locale) {
+	      var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : noop;
+
+	      this.locale = locale;
+	      this.fresh();
+	      cb();
+	    }
+	  }, {
+	    key: 'loadJs',
+	    value: function loadJs(src, cb) {
+	      var script = document.createElement('script');
+	      script.src = src;
+
+	      script.onload = script.onreadystatechange = function () {
+	        if (script.readyState === 'loaded' || script.readyState === 'complete') {
+	          cb && cb();
+	        }
+	      };
+
+	      document.getElementsByTagName[head][0].appendChild(script);
+	    }
+	  }, {
+	    key: 'setMessages',
+	    value: function setMessages(obj) {
+	      this.messages = obj;
 	    }
 	  }]);
 

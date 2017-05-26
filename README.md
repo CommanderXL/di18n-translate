@@ -45,3 +45,11 @@ let str = di18n.$html(tpl)
 // 最后再将这个dom字符串传入到页面当中去
 document.querySelector('.box-wrapper').innerHTML = str
 ```
+
+
+```javascript
+  // 手动设置当前的语言环境
+  di18n.setLocale('en', function () {
+    // 回调函数
+  })
+```
