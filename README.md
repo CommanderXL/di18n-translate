@@ -47,8 +47,8 @@ document.querySelector('.box-wrapper').innerHTML = str
 ```
 
 
+手动设置语言版本，并更新页面内容
 ```javascript
-  // 手动设置当前的语言环境
   di18n.setLocale('en', function () {
     // 回调函数
   })
