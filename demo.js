@@ -15,6 +15,6 @@ const di18n = new DI18n({
   }
 })
 
-let html = '<div class="title">$t("设置密码")</div><p class="desc">$t("记住密码")</p><div class="pwd-btn btn-hook">$t("确定")</div>'
+let html = '<div class="title">$t("你好")</div><p class="desc">$t("记住密码")</p><div class="pwd-btn btn-hook">$t("确定")</div>'
 
 console.log(di18n.$html(html))

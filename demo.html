@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-  
-  </body>
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <h1 i18n-class="h1-class">This is i18n-class</h1>
+  <h2 i18n-content="设置密码"></h2>
+  <input type="text" i18n-placeholder="确定">
+  <br/>
+  <img alt="img" i18n-img="./favicon.png" width="30" height="30">
+  <script src="./dist/di18n.min.js"></script>
+  <script>
+    const di18n = new DI18n({
+      locale: 'en',
+      isReplace: true,
+      messages: {
+        en: {
+          你好: 'Hello',
+          设置密码: 'set password',
+          记住密码: '设置密码可保障资金安全，密码为后续登录凭证，请务必牢记',
+          确定: "confirm"
+        },
+        zh: {
+          你好: '你好'
+        }
+      }
+    })
+  </script>
+</body>
+
 </html>

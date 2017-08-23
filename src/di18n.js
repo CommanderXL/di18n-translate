@@ -36,30 +36,43 @@ export class DI18n extends T {
   }
 
   handlerClass() {
-    this.doms.classDoms && this.doms.classDoms.forEach((dom, index) => {
-      addClass(dom, dom.getAttribute(CLASS_ATTRIBUTE))
-    })
+    if (this.doms.classDoms && this.doms.classDoms.length) {
+      for (let i = 0; i < this.doms.classDoms.length; i++) {
+        let dom = this.doms.classDoms[i]
+        addClass(dom, dom.getAttribute(CLASS_ATTRIBUTE))
+      }
+    }
   }
 
   handlerImg() {
-    this.doms.imgDoms && this.doms.imgDoms.forEach((dom, index) => {
-      let src = dom.getAttribute(IMG_ATTRIBUTE).replace(LOCALE_PATTERN, this.locale)
-      dom.src = src
-    })
+    if (this.doms.imgDoms && this.doms.imgDoms.length) {
+      for (let i = 0; i < this.doms.imgDoms.length; i++) {
+        let dom = this.doms.imgDoms[i]
+        let src = dom.getAttribute(IMG_ATTRIBUTE).replace(LOCALE_PATTERN, this.locale)
+        dom.src = src
+      }
+    }
   }
 
   handlerContent() {
-    this.doms.contentDoms && this.doms.contentDoms.forEach((dom, index) => {
-      let content = dom.getAttribute(CONTENT_ATTRIBUTE)
-      dom.innerHTML = this.messages[this.locale][content]
-    })
+    if (this.doms.contentDoms && this.doms.contentDoms.length) {
+      for (let i = 0; i < this.doms.contentDoms.length; i++) {
+        let dom = this.doms.contentDoms[i]
+        let content = dom.getAttribute(CONTENT_ATTRIBUTE)
+        console.log(content)
+        dom.innerHTML = this.messages[this.locale][content]
+      }
+    }
   }
 
   handlerInput() {
-    this.doms.inputDoms && this.doms.inputDoms.forEach((dom, index) => {
-      let placeHolderKey = dom.getAttribute(PLACEHOLDER_ATTRIBUTE)
-      dom.setAttribute('placeholder', this.currMessage[placeHolderKey])
-    })
+    if (this.doms.inputDoms && this.doms.inputDoms.length) {
+      for (let i = 0; i < this.doms.inputDoms.length; i++) {
+        let dom = this.doms.inputDoms[i]
+        let placeHolderKey = dom.getAttribute(PLACEHOLDER_ATTRIBUTE)
+        dom.setAttribute('placeholder', this.currMessage[placeHolderKey])
+      }
+    }
   }
 
   fresh() {
